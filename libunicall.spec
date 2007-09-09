@@ -20,7 +20,7 @@ BuildRequires:	audiofile-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	file
-BuildRequires:  zaptel-devel
+BuildRequires:  tonezone-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
