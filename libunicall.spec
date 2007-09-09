@@ -1,10 +1,11 @@
-%define	major 0
-%define libname	%mklibname unicall %{major}
+%define major 0
+%define libname %mklibname unicall %{major}
+%define develname %mklibname unicall -d
 
 Summary:	A interface independance library for telephony call control
 Name:		libunicall
 Version:	0.0.3
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	GPL
 Group:		System/Libraries
 URL:		http://www.soft-switch.org/libunicall
@@ -32,14 +33,14 @@ Group:          System/Libraries
 %description -n	%{libname}
 libunicall is an interface independance library for telephony call control.
 
-%package -n	%{libname}-devel
+%package -n	%{develname}
 Summary:	Header files and libraries needed for development with libunicall
 Group:		Development/C
-Provides:	%{name}-devel lib%{name}-devel
-Obsoletes:	%{name}-devel lib%{name}-devel
 Requires:	%{libname} = %{version}
+Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname unicall 0 -d}
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 This package includes the header files and libraries needed for
 developing programs using libunicall.
 
@@ -54,7 +55,7 @@ find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 
 %build
 export WANT_AUTOCONF_2_5=1
-libtoolize --copy --force && aclocal-1.7 && autoconf && automake-1.7 --add-missing --copy
+libtoolize --copy --force; aclocal-1.7; autoconf; automake-1.7 --add-missing --copy
 
 %configure2_5x
 
@@ -77,7 +78,7 @@ make CFLAGS="%{optflags} -fPIC"
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{_libdir}/*.so.*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-, root, root)
 %dir %{_includedir}/unicall
 %{_includedir}/unicall/*.h
@@ -85,5 +86,3 @@ make CFLAGS="%{optflags} -fPIC"
 %{_libdir}/*.so
 %{_libdir}/*.a
 %{_libdir}/*.la
-
-
