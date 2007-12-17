@@ -21,7 +21,6 @@ BuildRequires:	libxml2-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	file
 BuildRequires:  tonezone-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 libunicall is an interface independance library for telephony call control.
