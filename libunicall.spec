@@ -5,7 +5,7 @@
 Summary:	A interface independance library for telephony call control
 Name:		libunicall
 Version:	0.0.3
-Release:	%mkrel 5
+Release:	%mkrel 6
 License:	GPL
 Group:		System/Libraries
 URL:		http://www.soft-switch.org/libunicall
