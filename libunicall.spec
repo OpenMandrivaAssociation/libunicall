@@ -1,16 +1,16 @@
-%define major 0
+%define	major 0
 %define libname %mklibname unicall %{major}
 %define develname %mklibname unicall -d
 
 Summary:	A interface independance library for telephony call control
 Name:		libunicall
-Version:	0.0.3
-Release:	%mkrel 6
-License:	GPL
+Version:	0.0.6
+Release:	%mkrel 0.pre1.1
+License:	LGPL
 Group:		System/Libraries
-URL:		http://www.soft-switch.org/libunicall
-Source0:	http://www.soft-switch.org/libunicall/libunicall-%{version}.tar.bz2
-Patch0:		libunicall-zaptel_header.diff
+URL:		http://www.soft-switch.org/unicall/installing-mfcr2.html
+Source0:	http://www.soft-switch.org/downloads/unicall/libunicall-%{version}pre1.tgz
+Patch0:		libunicall-linkage_fix.diff
 BuildRequires:	autoconf2.5
 BuildRequires:	automake1.7
 BuildRequires:	libtool
@@ -20,8 +20,7 @@ BuildRequires:	audiofile-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	file
-BuildRequires:  tonezone-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 libunicall is an interface independance library for telephony call control.
@@ -36,18 +35,19 @@ libunicall is an interface independance library for telephony call control.
 %package -n	%{develname}
 Summary:	Header files and libraries needed for development with libunicall
 Group:		Development/C
-Requires:	%{libname} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
+Provides:	lib%{name}-devel = %{version}-%{release}
+Requires:	%{libname} = %{version}
 Obsoletes:	%{mklibname unicall 0 -d}
 
 %description -n	%{develname}
-This package includes the header files and libraries needed for
-developing programs using libunicall.
+This package includes the header files and libraries needed for developing
+programs using libunicall.
 
 %prep
 
 %setup -q
-%patch0 -p1
+%patch0 -p0
 
 # strip away annoying ^M
 find . -type f|xargs file|grep 'CRLF'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
@@ -62,7 +62,7 @@ libtoolize --copy --force; aclocal-1.7; autoconf; automake-1.7 --add-missing --c
 make CFLAGS="%{optflags} -fPIC"
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %makeinstall_std
 
@@ -75,12 +75,12 @@ make CFLAGS="%{optflags} -fPIC"
 %endif
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-, root, root)
 %doc AUTHORS COPYING ChangeLog NEWS README
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
 %defattr(-, root, root)
