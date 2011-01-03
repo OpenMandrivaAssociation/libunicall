@@ -11,15 +11,9 @@ Group:		System/Libraries
 URL:		http://www.soft-switch.org/unicall/installing-mfcr2.html
 Source0:	http://www.soft-switch.org/downloads/unicall/libunicall-%{version}pre1.tgz
 Patch0:		libunicall-linkage_fix.diff
-BuildRequires:	autoconf2.5
-BuildRequires:	automake
-BuildRequires:	libtool
+Patch1:		libunicall-0.0.6pre1-fix-str-fmt.patch
 BuildRequires:	tiff-devel >= 3.6.1-3mdk
 BuildRequires:	spandsp-devel
-BuildRequires:	audiofile-devel
-BuildRequires:	libxml2-devel
-BuildRequires:	jpeg-devel
-BuildRequires:	file
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -45,21 +39,19 @@ This package includes the header files and libraries needed for developing
 programs using libunicall.
 
 %prep
-
 %setup -q
-%patch0 -p0
+%patch0 -p0 -b .link
+%patch1 -p0
 
 # strip away annoying ^M
 find . -type f|xargs file|grep 'CRLF'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 
 %build
-export WANT_AUTOCONF_2_5=1
-libtoolize --copy --force; aclocal; autoconf; automake --add-missing --copy
-
+export CFLAGS="%{optflags} -fPIC"
+autoreconf -fi
 %configure2_5x
-
-make CFLAGS="%{optflags} -fPIC"
+%make
 
 %install
 rm -rf %{buildroot}
