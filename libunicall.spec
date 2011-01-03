@@ -5,14 +5,14 @@
 Summary:	A interface independance library for telephony call control
 Name:		libunicall
 Version:	0.0.6
-Release:	%mkrel 0.pre1.2
+Release:	%mkrel 0.pre1.3
 License:	LGPL
 Group:		System/Libraries
 URL:		http://www.soft-switch.org/unicall/installing-mfcr2.html
 Source0:	http://www.soft-switch.org/downloads/unicall/libunicall-%{version}pre1.tgz
 Patch0:		libunicall-linkage_fix.diff
 BuildRequires:	autoconf2.5
-BuildRequires:	automake1.7
+BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	tiff-devel >= 3.6.1-3mdk
 BuildRequires:	spandsp-devel
@@ -55,7 +55,7 @@ find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 
 %build
 export WANT_AUTOCONF_2_5=1
-libtoolize --copy --force; aclocal-1.7; autoconf; automake-1.7 --add-missing --copy
+libtoolize --copy --force; aclocal; autoconf; automake --add-missing --copy
 
 %configure2_5x
 
