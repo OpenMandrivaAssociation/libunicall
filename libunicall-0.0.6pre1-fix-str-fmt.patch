@@ -1,0 +1,20 @@
+--- unicall.c.str	2011-01-03 13:09:17.000000000 +0000
++++ unicall.c	2011-01-03 13:09:36.000000000 +0000
+@@ -919,7 +919,7 @@
+     if (__uc_message)
+         __uc_message(level, tmp);
+     else
+-        fprintf(stdout, tmp);
++        fprintf(stdout, "%s", tmp);
+     /*endif*/
+ }
+ /*- End of function --------------------------------------------------------*/
+@@ -935,7 +935,7 @@
+     if (__uc_error)
+         __uc_error(tmp);
+     else
+-        fprintf(stderr, tmp);
++        fprintf(stderr, "%s", tmp);
+     /*endif*/
+ }
+ /*- End of function --------------------------------------------------------*/

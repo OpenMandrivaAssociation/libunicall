@@ -1,0 +1,19 @@
+--- Makefile.am.link	2011-01-03 13:13:28.000000000 +0000
++++ Makefile.am	2011-01-03 13:14:57.000000000 +0000
+@@ -43,6 +43,7 @@
+                         hashtable.c \
+                         simplesched.c
+ libunicall_la_LDFLAGS = -version-info @UNICALL_LT_CURRENT@:@UNICALL_LT_REVISION@:@UNICALL_LT_AGE@
++libunicall_la_LIBADD = -ldl
+ 
+ nobase_include_HEADERS = unicall/hashtable.h \
+                          unicall/unicall-private.h
+@@ -53,7 +54,7 @@
+ 
+ testcall_SOURCES = testcall.c
+ 
+-testcall_LDADD = -lunicall $(TESTLIBS)
++testcall_LDADD = libunicall.la $(TESTLIBS)
+ 
+ manual: unicall-manual/index.html
+ 
