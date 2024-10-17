@@ -8,7 +8,7 @@ Version:	0.0.6
 Release:	%mkrel 0.pre1.3
 License:	LGPL
 Group:		System/Libraries
-URL:		http://www.soft-switch.org/unicall/installing-mfcr2.html
+URL:		https://www.soft-switch.org/unicall/installing-mfcr2.html
 Source0:	http://www.soft-switch.org/downloads/unicall/libunicall-%{version}pre1.tgz
 Patch0:		libunicall-linkage_fix.diff
 Patch1:		libunicall-0.0.6pre1-fix-str-fmt.patch
