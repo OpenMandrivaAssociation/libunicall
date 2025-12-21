@@ -12,6 +12,11 @@ URL:		https://www.soft-switch.org/unicall/installing-mfcr2.html
 Source0:	http://www.soft-switch.org/downloads/unicall/libunicall-%{version}pre1.tgz
 Patch0:		libunicall-linkage_fix.diff
 Patch1:		libunicall-0.0.6pre1-fix-str-fmt.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	tiff-devel >= 3.6.1-3mdk
 BuildRequires:	spandsp-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
