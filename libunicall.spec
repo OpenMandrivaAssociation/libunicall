@@ -5,7 +5,7 @@
 Summary:	A interface independance library for telephony call control
 Name:		libunicall
 Version:	0.0.6
-Release:	%mkrel 0.pre1.3
+Release:	1
 License:	LGPL
 Group:		System/Libraries
 URL:		https://www.soft-switch.org/unicall/installing-mfcr2.html
